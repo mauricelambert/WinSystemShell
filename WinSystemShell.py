@@ -142,7 +142,7 @@ class PipeClient:
 
         self.executable = executable
         self.server_path = server_path
-        self.use_schtasks = use_schtasks
+        self.schtasks = schtasks
         self.pipe_in = PIPEDIR + (pipein or self._gen_random_name())
         self.pipe_out = PIPEDIR + (pipeout or self._gen_random_name())
         
@@ -175,13 +175,16 @@ class PipeClient:
         
         server_cmd = f'"\"{executable}\" \"{self.server_path}\" \"{self.executable}\" \"{self.pipe_in}\" \"{self.pipe_out}\"'
 
-        if self.schtasks:
+        if self.schtasks is None:
             schtasks = r"C:\Windows\System32\schtasks.exe"
             task_cmd = (
                 f'"{CMD}" /c '
                 + server_cmd +
-                f'& \"{schtasks}\" /delete /tn RunOnceSystem /f"'
+                f' & \"{schtasks}\" /delete /tn RunOnceSystem /f"'
             )
+            
+            if len(task_cmd) > 255:
+                 task_cmd = server_cmd
             
             Popen(
                 [
@@ -364,7 +367,7 @@ def valid_windows_path(path: str) -> str:
     """
 
     path = abspath(path)
-    if not match(r"^[a-zA-Z]:\\\\", path):
+    if not match("^[a-zA-Z]:\\\\", path):
         raise ArgumentTypeError(f"Invalid Windows path: {path}")
     return path
 

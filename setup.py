@@ -1,9 +1,8 @@
 from setuptools import setup, find_packages
-import WinSystemShell as package
 
 setup(
     name='WinSystemShell',
-    version=package.__version__,
+    version="0.0.2",
     py_modules=['SystemShellServer', 'WinSystemShell'],
     packages=find_packages(include=[]),
     install_requires=[],
