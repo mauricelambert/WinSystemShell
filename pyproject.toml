@@ -1,0 +1,55 @@
+# [build-system]
+# requires = ["setuptools"]
+# build-backend = "setuptools.build_meta"
+
+[project]
+name = "WinSystemShell"
+version = "0.0.1"
+dependencies = []
+authors = [
+    {name = "Maurice Lambert", email = "mauricelambert434@gmail.com"},
+]
+maintainers = [
+    {name = "Maurice Lambert", email = "mauricelambert434@gmail.com"},
+]
+description = 'A local privilege escalation utility that allows elevating from an administrator context to the SYSTEM account on Windows to perform high-privilege operations.'
+readme = {file = "README.md", content-type = "text/markdown"}
+# url = "https://github.com/mauricelambert/WinSystemShell"
+# download-url = "https://mauricelambert.github.io/info/python/security/WinSystemShell.pyz"
+classifiers = [
+    "Topic :: System",
+    "Topic :: Security",
+    "Environment :: Console",
+    "Topic :: System :: Shells",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Topic :: System :: System Shells",
+    "Programming Language :: Python :: 3.8",
+    'Operating System :: Microsoft :: Windows',
+    "Topic :: System :: Systems Administration",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+]
+keywords = ['privilege escalation', 'privesc', 'SYSTEM', 'Windows', 'elevated rights', 'local admin']
+license = {text = "GPL-3.0 License"}
+requires-python = ">=3.8"
+
+[project.scripts]
+WinSystemShell = "WinSystemShell:main"
+
+[project.urls]
+"Github" = "https://github.com/mauricelambert/WinSystemShell"
+"Documentation" = "https://mauricelambert.github.io/info/python/security/WinSystemShell.html"
+"Python Executable" = "https://mauricelambert.github.io/info/python/security/WinSystemShell.pyz"
+"Windows Executable" = "https://mauricelambert.github.io/info/python/security/WinSystemShell.exe"
+
+[tool.setuptools]
+include-package-data = true
+platforms = ['Windows']
+py-modules = ['SystemShellServer', 'WinSystemShell']
+packages = []
+script-files = []
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
